@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="input" placeholder="nhap tin nhan">
+<button id="gui" onclick="gui()">send</button>
+<script>
+    function mobile(name, battery) {
+        this.name = name;
+        this.battery = battery;
+        this.inbox = [];
+        this.typing ="";
+        this.sends = [];
+
+        this.getName = function () {
+            return this.name
+        };
+        this.getBattery = function () {
+            return this.battery;
+        };
+        this.sending = function (name) {
+            name.sends.push(this.typing);
+            this.battery -=2;
+        };
+        this.getInbox = function (name) {
+            name.inbox.push(this.typing);
+            this.battery--;
+        };
+    }
+
+function gui() {
+    let nokia = new mobile(name, 99);
+    let iphone = new mobile(name, 99);
+    nokia.getName();
+    iphone.getName();
+    nokia.typing = document.getElementById("input").value;
+    nokia.sending(nokia);
+    iphone.typing = nokia.typing;
+    iphone.getInbox(iphone);
+    nokia.getBattery();
+    iphone.getBattery();
+
+    console.log(nokia.sends);
+    console.log(nokia.battery);
+    console.log("hop thu den " + iphone.inbox);
+    console.log(iphone.battery);
+}
+
+</script>
+
+</body>
+</html>
